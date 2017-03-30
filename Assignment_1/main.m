@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Parser.h"
 
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
-	    // insert code here...
-	    NSLog(@"Hello, World!");
-	}
+
+        Parser *parser = [[Parser alloc] initWithInputFromUser: @"2+3"];
+
+        NSLog(@"String: %@", parser.description);
+
+    }
     return 0;
 }
