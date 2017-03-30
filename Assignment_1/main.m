@@ -15,6 +15,9 @@ int main(int argc, const char * argv[]) {
         Parser *parser = [[Parser alloc] initWithInputFromUser: @"2+3"];
 
         NSLog(@"String: %@", parser.description);
+        BOOL hasOperator = [parser isOperatorAtTheEnd:@"2+3%"];
+
+        NSLog(@"Operator at the end is symbol: %d", hasOperator);
 
     }
     return 0;
