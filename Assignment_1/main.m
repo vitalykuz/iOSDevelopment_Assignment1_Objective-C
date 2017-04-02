@@ -12,12 +12,25 @@
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
 
-        Parser *parser = [[Parser alloc] initWithInputFromUser: @"2+3"];
-        NSLog(@"String: %@", parser.description);
+        Parser *parser = [[Parser alloc] initWithInputFromUser: @"2+3-7"];
 
+
+        NSLog(@"Input from user: %@", parser.inputFromUser);
         [parser parseUserInput: parser.inputFromUser];
 
-        [parser convertNumberToIntAndAddToArray:@"32"];
+//        parser.number = (NSMutableString *) @"23";
+//        NSLog(@"Number: %@", parser.number);
+//        NSLog(@"Array of Numbers: %@", parser.arrayOfNumbers);
+//        [parser convertNumberToIntAndAddToArray:@"234"];
+//        NSLog(@"Number: %@", parser.number);
+//        NSLog(@"Array of Numbers: %@", parser.arrayOfNumbers);
+
+
+//
+//        NSLog(@"Array of Operators Before: %@", parser.arrayOfOperators);
+//        [parser testingSaveOperators: parser.inputFromUser];
+//        NSLog(@"Array of Operators After: %@", parser.arrayOfOperators);
+
 
         NSLog(@"%@", parser.arrayOfNumbers);
         NSLog(@"%@", parser.arrayOfOperators);

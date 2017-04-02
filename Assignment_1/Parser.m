@@ -15,7 +15,10 @@
 - (id)initWithInputFromUser:(NSString *)inputFromUser {
     self = [super init];
     self.inputFromUser = inputFromUser;
-    self.number = (NSMutableString *) @"";
+    self.number = [[NSMutableString alloc]init];
+    self.arrayOfOperators = [[NSMutableArray alloc] init];
+    self.arrayOfNumbers = [[NSMutableArray alloc] init];
+    //self.number = (NSMutableString *) @"";
 
     return self;
 }
@@ -30,6 +33,7 @@
         [self printErrorWith:@"Invalid input in parseUserInput"];
     } else {
         [self startParsing:userInput];
+        //NSLog(@"Else is working");
     }
 }
 
@@ -84,7 +88,10 @@
                 {
                     //IsNumberEmpty(number);
                     [self convertNumberToIntAndAddToArray:self.number];
-                    [self.arrayOfOperators addObject:@(symbol)];
+
+                    NSString *singleCharacter  = [NSString stringWithFormat:@"%c", symbol];
+                    [self.arrayOfOperators addObject:singleCharacter];
+
                     //listOfOperators.Add(symbol);
                     operatorCounter++;
                 }
@@ -97,7 +104,7 @@
         }
     }
     [self convertNumberToIntAndAddToArray:self.number];
-    //IsNumberEmpty(number);
+
     if ( [self isOperatorEmpty] )
     {
         [self printErrorWith:@"Invalid input final one"];
@@ -111,13 +118,15 @@
 
 - (void)printErrorWith:(NSString *) message {
     NSLog(@"%@",message);
+    exit(0);
 }
 
 - (void)convertNumberToIntAndAddToArray:(NSString *)number {
     if ( [number length] != 0 ) {
         @try {
-            NSInteger numberToAddToList = [self.number integerValue];
-            [self.arrayOfNumbers addObject:@(numberToAddToList)];
+            NSNumber *numberObject = @([number intValue]);
+            [self.arrayOfNumbers addObject: numberObject];
+
             self.number = (NSMutableString *) @"";
         } @catch (NSError *error) {
             [self printErrorWith:@"Invalid input try-catch"];
@@ -167,6 +176,40 @@
     return NO;
 }
 
+// TO-DO: Delete after testing
+- (void)testingSaveToMutableArray:(NSString *)userInput {
+    for (int i = 0; i < [userInput length]; i++) {
+        char symbol = (char) [userInput characterAtIndex:(NSUInteger) i];
+
+        if ([self isSymbolNumber:symbol]) {
+
+            NSInteger convertedCharToNumber = [self convertCharToInt:symbol];
+            [self.number appendString:[NSString stringWithFormat:@"%li", convertedCharToNumber]];
+            NSLog(@"Self number: %@", self.number);
+
+
+            NSNumber *number = @([self.number intValue]);
+            [self.arrayOfNumbers addObject: number];
+
+            NSLog(@"Array of Numbers: %@", self.arrayOfNumbers);
+            //self.number += symbol;
+        }
+    }
+}
+
+// TO-DO: Delete after testing
+- (void)testingSaveOperators:(NSString *)userInput {
+    for (int i = 0; i < [userInput length]; i++) {
+        char symbol = (char) [userInput characterAtIndex:(NSUInteger) i];
+
+        if ([self isOperatorSymbol:symbol]) {
+
+            NSString *singleCharacter  = [NSString stringWithFormat:@"%c", symbol];
+            [self.arrayOfOperators addObject:singleCharacter];
+        }
+    }
+    NSLog(@"Array of operators: %@", self.arrayOfOperators);
+}
 
 @end
 
