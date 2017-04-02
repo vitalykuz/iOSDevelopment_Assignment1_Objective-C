@@ -6,7 +6,6 @@
 #import "Parser.h"
 
 
-void startParsing(NSString *input);
 
 
 @implementation Parser {
@@ -28,8 +27,9 @@ void startParsing(NSString *input);
     if ([self isOperatorAtTheEnd:userInput]  || [self areTwoOperatorsAtStartOfUserInput:userInput])
     {
         NSLog(@"Invalid input in parseUserInput");
+    } else {
+        [self startParsing:userInput];
     }
-    else startParsing(userInput);
 }
 
 /**
@@ -48,6 +48,14 @@ void startParsing(NSString *input);
         }
     }
     return NO;
+}
+
+- (void)startParsing:(NSString *) input {
+    NSLog(@"I am in start parsing");
+}
+
+- (BOOL)isSymbolNumber:(char)symbol {
+    return symbol >= '0' && symbol <= '9';
 }
 
 
@@ -83,8 +91,8 @@ void startParsing(NSString *input);
     return NO;
 }
 
+
 @end
 
-void startParsing(NSString *userInput) {
-    NSLog(@"I am in start parsing!");
-}
+
+
