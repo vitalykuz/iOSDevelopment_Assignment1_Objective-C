@@ -6,12 +6,14 @@
 #import "Parser.h"
 
 
+void startParsing(NSString *input);
+
+
 @implementation Parser {
 
 }
 
 - (id)initWithInputFromUser:(NSString *)inputFromUser {
-
     self = [super init];
     self.inputFromUser = inputFromUser;
 
@@ -22,10 +24,45 @@
     return self.inputFromUser;
 }
 
+- (void)parseUserInput:(NSString *)userInput {
+    if ([self isOperatorAtTheEnd:userInput]  || [self areTwoOperatorsAtStartOfUserInput:userInput])
+    {
+        NSLog(@"Invalid input in parseUserInput");
+    }
+    else startParsing(userInput);
+}
+
+/**
+ * checks if a user typed 2 minuses or 2 pluses at the beginning of expression.
+ * @param userInput -> command line argument provided by a user
+ * @returns  true if 2 minuses or 2 pluses are found at the beginning
+ */
+- (BOOL)areTwoOperatorsAtStartOfUserInput:(NSString *)userInput {
+    for (int i = 0; i < [userInput length]; i++)
+    {
+        char symbol = (char) [userInput characterAtIndex:(NSUInteger) i];
+        //char nextSymbol = (char) [userInput characterAtIndex:(NSUInteger) i + 1];
+        if ((symbol == '-' && [userInput characterAtIndex:(NSUInteger) i + 1] == '-' && i == 0) || (symbol == '+' && [userInput characterAtIndex:(NSUInteger) i + 1] == '+' && i == 0))
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
+/**
+ * checks if the parameter(symbol) is an operator (not a number)
+ * @return returns true if the parameter is the operator
+ */
 - (BOOL)isOperatorSymbol:(char)symbol {
     return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/' || symbol == '%';
 }
 
+/**
+ * checks if a user typed operator at the very end of expression.
+ * @returns true, if an operator at the end is found
+ */
 - (BOOL)isOperatorAtTheEnd:(NSString *)userInput {
     //get the length of the user input
     NSUInteger userInputLength = [userInput length];
@@ -33,13 +70,10 @@
     for (int i = 0; i < userInputLength; i++)
     {
         char symbol = (char) [userInput characterAtIndex:(NSUInteger) i];
-        NSLog(@"Char in input: %c", symbol);
 
         if ([self isOperatorSymbol:symbol])
         {
-            //char lastChar = userInput[userInputLength - 1];
             char lastChar = (char) [userInput characterAtIndex: userInputLength - 1];
-            NSLog(@"Last char in input: %c", lastChar);
             if ([userInput characterAtIndex:(NSUInteger) i] == lastChar)
             {
                 return YES;
@@ -50,3 +84,7 @@
 }
 
 @end
+
+void startParsing(NSString *userInput) {
+    NSLog(@"I am in start parsing!");
+}
