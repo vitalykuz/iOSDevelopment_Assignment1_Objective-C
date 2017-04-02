@@ -15,6 +15,7 @@
 - (id)initWithInputFromUser:(NSString *)inputFromUser {
     self = [super init];
     self.inputFromUser = inputFromUser;
+    self.number = (NSMutableString *) @"";
 
     return self;
 }
@@ -26,7 +27,7 @@
 - (void)parseUserInput:(NSString *)userInput {
     if ([self isOperatorAtTheEnd:userInput]  || [self areTwoOperatorsAtStartOfUserInput:userInput])
     {
-        NSLog(@"Invalid input in parseUserInput");
+        [self printErrorWith:@"Invalid input in parseUserInput"];
     } else {
         [self startParsing:userInput];
     }
@@ -50,12 +51,87 @@
     return NO;
 }
 
-- (void)startParsing:(NSString *) input {
+- (void)startParsing:(NSString *)userInput {
     NSLog(@"I am in start parsing");
+
+
+    int operatorCounter = 1;
+    for (int i = 0; i < [userInput length]; i++)
+    {
+        char symbol = (char) [userInput characterAtIndex:(NSUInteger) i];
+        //if a symbol is a number, adds to the list of operators
+        if ([self isSymbolNumber:symbol])
+        {
+            NSInteger convertedCharToNumber = [self convertCharToInt:symbol];
+            [self.number appendString:[NSString stringWithFormat:@"%li", convertedCharToNumber]];
+            //self.number += symbol;
+            operatorCounter = 0;
+        }
+        else
+        {
+            if ([self isOperatorSymbol:symbol])
+            {
+                //checks if the symbol is a unary operator.
+                if ((symbol == '-' || symbol == '+') && ([self isSymbolNumber:(char) [userInput characterAtIndex:(NSUInteger) i + 1]])
+                        && (operatorCounter == 1))
+                {
+                    NSInteger convertedCharToNumber = [self convertCharToInt:symbol];
+                    [self.number appendString:[NSString stringWithFormat:@"%li", convertedCharToNumber]];
+                    operatorCounter = 0;
+                    NSLog(@"Number in here: %@", self.number);
+                }
+                else if (operatorCounter == 0)
+                {
+                    //IsNumberEmpty(number);
+                    [self convertNumberToIntAndAddToArray:self.number];
+                    [self.arrayOfOperators addObject:@(symbol)];
+                    //listOfOperators.Add(symbol);
+                    operatorCounter++;
+                }
+                else [self printErrorWith:@"Invalid input operatorCounter == 0 "];
+            }
+            else
+            {
+                [self printErrorWith:@"Invalid input operatorCounter == 0 below"];
+            }
+        }
+    }
+    [self convertNumberToIntAndAddToArray:self.number];
+    //IsNumberEmpty(number);
+    if ( [self isOperatorEmpty] )
+    {
+        [self printErrorWith:@"Invalid input final one"];
+
+    }
 }
 
 - (BOOL)isSymbolNumber:(char)symbol {
     return symbol >= '0' && symbol <= '9';
+}
+
+- (void)printErrorWith:(NSString *) message {
+    NSLog(@"%@",message);
+}
+
+- (void)convertNumberToIntAndAddToArray:(NSString *)number {
+    if ( [number length] != 0 ) {
+        @try {
+            NSInteger numberToAddToList = [self.number integerValue];
+            [self.arrayOfNumbers addObject:@(numberToAddToList)];
+            self.number = (NSMutableString *) @"";
+        } @catch (NSError *error) {
+            [self printErrorWith:@"Invalid input try-catch"];
+        }
+    }
+}
+
+- (NSInteger)convertCharToInt:(char)symbol {
+    NSInteger number = [[NSString stringWithFormat:@"%c", symbol] intValue];
+    return number;
+}
+
+- (BOOL)isOperatorEmpty {
+    return self.arrayOfOperators.count == 0;
 }
 
 

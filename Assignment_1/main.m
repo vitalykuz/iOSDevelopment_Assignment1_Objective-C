@@ -17,6 +17,11 @@ int main(int argc, const char * argv[]) {
 
         [parser parseUserInput: parser.inputFromUser];
 
+        [parser convertNumberToIntAndAddToArray:@"32"];
+
+        NSLog(@"%@", parser.arrayOfNumbers);
+        NSLog(@"%@", parser.arrayOfOperators);
+
     }
     return 0;
 }

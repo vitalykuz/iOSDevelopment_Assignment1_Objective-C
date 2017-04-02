@@ -11,14 +11,20 @@
 }
 
 @property (nonatomic, strong) NSString *inputFromUser;
-@property (nonatomic) NSInteger number;
+@property (nonatomic, strong) NSMutableString * number;
+@property (nonatomic, strong) NSMutableArray *arrayOfOperators;
+@property (nonatomic, strong) NSMutableArray *arrayOfNumbers;
 -(id)initWithInputFromUser:(NSString *)inputFromUser;
 -(NSString *)description;
 -(BOOL) isOperatorAtTheEnd:(NSString *)userInput;
 -(BOOL) isOperatorSymbol: (char) symbol;
 -(void) parseUserInput: (NSString *)userInput;
 -(BOOL) areTwoOperatorsAtStartOfUserInput: (NSString *) userInput;
--(void) startParsing:(NSString *) input;
+-(void) startParsing:(NSString *)userInput;
 -(BOOL) isSymbolNumber:(char) symbol;
+-(void) printErrorWith: (NSString *) message;
+-(void)convertNumberToIntAndAddToArray: (NSString *) number;
+-(NSInteger) convertCharToInt: (char) symbol;
+-(BOOL) isOperatorEmpty;
 
 @end
