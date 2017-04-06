@@ -7,24 +7,16 @@
 
 
 @interface Calculator : NSObject {
-    //char firstOperatorsToCalculate[];
-     enum PriorityOperators {
-        Multiply,
-        Divide,
-        Modulo
-    };
 
 }
 
 @property (nonatomic, strong) NSMutableArray *arrayOfOperators;
 @property (nonatomic, strong) NSMutableArray *arrayOfNumbers;
 
-
-
-
 -(id)initWith: (NSMutableArray *) arrayOfOperators and: (NSMutableArray *) arrayOfNumbers;
 -(NSString *) checkPriorityOperators;
 -(void) printErrorWith: (NSString *) message;
 -(void)updateListsAt: (NSInteger) position;
+-(NSInteger) performCalculation: (NSInteger) number1  :(NSInteger) number2 :(char) operation;
 
 @end

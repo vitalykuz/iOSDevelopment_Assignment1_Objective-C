@@ -13,17 +13,14 @@
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
 
-        Parser *parser = [[Parser alloc] initWithInputFromUser:(NSString *) @"2+-3+7--7*23%3"];
+        Parser *parser = [[Parser alloc] initWithInputFromUser:(NSString *) @"2+2-+3%7*3/33--6"];
 
         [parser parseUserInput: parser.inputFromUser];
 
         Calculator *calculator = [[Calculator alloc] initWith:parser.arrayOfOperators and:parser.arrayOfNumbers];
-        //calculator.checkPriorityOperators;
+        NSString *result = calculator.checkPriorityOperators;
 
-        [calculator updateListsAt:0];
-
-        NSLog(@"Array of Numbers: %@", parser.arrayOfNumbers);
-        NSLog(@"Array of Operators: %@", parser.arrayOfOperators);
+        NSLog(@"Result: %@", result);
 
     }
     return 0;
