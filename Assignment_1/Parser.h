@@ -10,8 +10,9 @@
 
 }
 
-@property (nonatomic, strong) NSString *inputFromUser;
-@property (nonatomic, strong) NSMutableString * number;
+@property (nonatomic) NSString *inputFromUser;
+@property (nonatomic) NSMutableString * number;
+@property (nonatomic) NSMutableString * numberTest;
 @property (nonatomic, strong) NSMutableArray *arrayOfOperators;
 @property (nonatomic, strong) NSMutableArray *arrayOfNumbers;
 -(id)initWithInputFromUser:(NSString *)inputFromUser;
@@ -31,6 +32,6 @@
 //delete after testing
 - (void)testingSaveToMutableArray:(NSString *)userInput;
 - (void)testingSaveOperators:(NSString *)userInput;
-- (void)testStartParsing:(NSMutableString *)userInput;
+- (void)testStartParsing:(char)userInput;
 
 @end

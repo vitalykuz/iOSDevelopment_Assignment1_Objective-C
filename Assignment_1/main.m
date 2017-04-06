@@ -12,13 +12,19 @@
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
 
-        Parser *parser = [[Parser alloc] initWithInputFromUser:(NSString *) @"2+3+7"];
+        Parser *parser = [[Parser alloc] initWithInputFromUser:(NSString *) @"2+3+7-7*23%3"];
 
 
         NSLog(@"Input from user: %@", parser.inputFromUser);
         [parser parseUserInput: parser.inputFromUser];
 
-         //[parser testStartParsing: parser.inputFromUser];
+//         [parser testStartParsing: '2'];
+//         [parser testStartParsing: '3'];
+//         [parser testStartParsing: '3'];
+//         [parser testStartParsing: '3'];
+//         [parser testStartParsing: '3'];
+//         [parser testStartParsing: '3'];
+//         [parser testStartParsing: '3'];
 
 //        parser.number = (NSMutableString *) @"23";
 //        NSLog(@"Number: %@", parser.number);
