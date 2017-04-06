@@ -11,14 +11,10 @@
 @implementation Parser {
 
 }
-
 - (id)initWithInputFromUser:(NSString *)inputFromUser {
     self = [super init];
     self.inputFromUser = inputFromUser;
-    self.number = [[NSMutableString alloc]init];
-    self.arrayOfOperators = [[NSMutableArray alloc] init];
-    self.arrayOfNumbers = [[NSMutableArray alloc] init];
-    //self.number = (NSMutableString *) @"";
+    self.number = (NSMutableString *) @"";
 
     return self;
 }
@@ -33,7 +29,6 @@
         [self printErrorWith:@"Invalid input in parseUserInput"];
     } else {
         [self startParsing:userInput];
-        //NSLog(@"Else is working");
     }
 }
 
@@ -67,6 +62,7 @@
         if ([self isSymbolNumber:symbol])
         {
             NSInteger convertedCharToNumber = [self convertCharToInt:symbol];
+            NSLog(@"Before self.number");
             [self.number appendString:[NSString stringWithFormat:@"%li", convertedCharToNumber]];
             //self.number += symbol;
             operatorCounter = 0;
@@ -88,10 +84,7 @@
                 {
                     //IsNumberEmpty(number);
                     [self convertNumberToIntAndAddToArray:self.number];
-
-                    NSString *singleCharacter  = [NSString stringWithFormat:@"%c", symbol];
-                    [self.arrayOfOperators addObject:singleCharacter];
-
+                    [self.arrayOfOperators addObject:@(symbol)];
                     //listOfOperators.Add(symbol);
                     operatorCounter++;
                 }
@@ -104,7 +97,7 @@
         }
     }
     [self convertNumberToIntAndAddToArray:self.number];
-
+    //IsNumberEmpty(number);
     if ( [self isOperatorEmpty] )
     {
         [self printErrorWith:@"Invalid input final one"];
@@ -118,15 +111,13 @@
 
 - (void)printErrorWith:(NSString *) message {
     NSLog(@"%@",message);
-    exit(0);
 }
 
 - (void)convertNumberToIntAndAddToArray:(NSString *)number {
     if ( [number length] != 0 ) {
         @try {
-            NSNumber *numberObject = @([number intValue]);
-            [self.arrayOfNumbers addObject: numberObject];
-
+            NSInteger numberToAddToList = [self.number integerValue];
+            [self.arrayOfNumbers addObject:@(numberToAddToList)];
             self.number = (NSMutableString *) @"";
         } @catch (NSError *error) {
             [self printErrorWith:@"Invalid input try-catch"];
@@ -176,6 +167,7 @@
     return NO;
 }
 
+
 // TO-DO: Delete after testing
 - (void)testingSaveToMutableArray:(NSString *)userInput {
     for (int i = 0; i < [userInput length]; i++) {
@@ -209,6 +201,22 @@
         }
     }
     NSLog(@"Array of operators: %@", self.arrayOfOperators);
+}
+
+
+- (void)testStartParsing:(NSMutableString *)userInput {
+    NSLog(@"I am in start parsing");
+
+
+    int operatorCounter = 1;
+    for (int i = 0; i < [userInput length]; i++) {
+        char symbol = (char) [userInput characterAtIndex:(NSUInteger) i];
+        //if a symbol is a number, adds to the list of operators
+        if ([self isSymbolNumber:symbol]) {
+            [self.number appendFormat:@"%c", symbol];
+            NSLog(@"Added number: %@", self.number);
+        }
+    }
 }
 
 @end
