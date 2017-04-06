@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Calculator.h"
 
 
 @interface Parser : NSObject {

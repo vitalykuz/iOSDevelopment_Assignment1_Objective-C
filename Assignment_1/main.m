@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Parser.h"
+#import "Calculator.h"
 
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
@@ -16,7 +17,10 @@ int main(int argc, const char * argv[]) {
 
         [parser parseUserInput: parser.inputFromUser];
 
+        Calculator *calculator = [[Calculator alloc] initWith:parser.arrayOfOperators and:parser.arrayOfNumbers];
+        //calculator.checkPriorityOperators;
 
+        [calculator updateListsAt:0];
 
         NSLog(@"Array of Numbers: %@", parser.arrayOfNumbers);
         NSLog(@"Array of Operators: %@", parser.arrayOfOperators);

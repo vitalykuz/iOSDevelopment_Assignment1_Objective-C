@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98BE936F1EF98667B3FA2B68 /* Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 98BE99BD3307CE9E738E3633 /* Calculator.m */; };
 		98BE97CFE38283F7C694CDEF /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 98BE902C149D5F424B603FB8 /* Parser.m */; };
 		D8E33A441E8CF30100583886 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E33A431E8CF30100583886 /* main.m */; };
 /* End PBXBuildFile section */
@@ -25,7 +26,9 @@
 
 /* Begin PBXFileReference section */
 		98BE902C149D5F424B603FB8 /* Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parser.m; sourceTree = "<group>"; };
+		98BE99BD3307CE9E738E3633 /* Calculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Calculator.m; sourceTree = "<group>"; };
 		98BE9BC8CEE57AB3FE24BD9B /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
+		98BE9ECBA03D78EC1E3305B0 /* Calculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calculator.h; sourceTree = "<group>"; };
 		D8E33A401E8CF30100583886 /* Assignment_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Assignment_1; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E33A431E8CF30100583886 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +66,8 @@
 				D8E33A431E8CF30100583886 /* main.m */,
 				98BE902C149D5F424B603FB8 /* Parser.m */,
 				98BE9BC8CEE57AB3FE24BD9B /* Parser.h */,
+				98BE99BD3307CE9E738E3633 /* Calculator.m */,
+				98BE9ECBA03D78EC1E3305B0 /* Calculator.h */,
 			);
 			path = Assignment_1;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 			files = (
 				D8E33A441E8CF30100583886 /* main.m in Sources */,
 				98BE97CFE38283F7C694CDEF /* Parser.m in Sources */,
+				98BE936F1EF98667B3FA2B68 /* Calculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
